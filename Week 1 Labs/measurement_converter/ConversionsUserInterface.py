@@ -1,6 +1,6 @@
 
-from MenuFunctions import display_menu, capture_menu_choice
-from Conversions import to_feet, to_meters, to_kilos, to_pounds, to_secs, to_hrsmins, \
+from measurement_converter.MenuFunctions import display_menu, capture_menu_choice
+from measurement_converter.Conversions import to_feet, to_meters, to_kilos, to_pounds, to_secs, to_hrsmins, \
     celsius_to_kelvin, kelvin_to_celsius
 
 
