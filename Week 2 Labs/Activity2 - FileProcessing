@@ -1,0 +1,35 @@
+"""Write a Python program to parse (split) the content of a csv file using string functions only
+and store it in an appropriate data structure. Print out a table with all the data using the
+following column headings (which are the first line in the css file): Title,Name,ID,Email,Company,Updated.
+Remember to consider readability and use formatting instructions in the output. """
+
+path = "C:/Users/redye/MASTERS YORK/Advanced Programming/Week 2 Labs/"
+file = open(path+"PeopleTrainngDate.csv", 'r')
+doc_contents = []
+longest_entries = []
+
+# read file into list structure
+for line in file:
+    doc_contents.append(line.split(","))
+file.close()
+
+# ammend header column to have same number of elements
+doc_contents[0].insert(2, "Forename")
+# remove final entry of "\n"
+doc_contents.pop()
+
+# create list of length of longest element for each column to aid printing later
+for i in range(len(doc_contents[0])-1):
+    max_len = 0
+    for entry in doc_contents:
+        if len(entry[i]) > max_len:
+            max_len = len(entry[i])
+    longest_entries.append(max_len)
+
+
+# print our contents of list
+for entry in doc_contents:
+    for i in range(len(entry)-1):
+        print(f"{entry[i]:>{longest_entries[i]+3}}", end="")
+        i += 1
+    print("\n")
