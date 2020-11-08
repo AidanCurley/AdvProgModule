@@ -25,29 +25,29 @@ class Tutor(Person):
     id = 0
 
     def __init__(self, name, address, age, salary, id):
-        super(Tutor, self).__init__(name, address, age)
+        super().__init__(name, address, age)
         self.salary = salary
         self.id = id
 
     def personal_details(self):
-        return super(Tutor, self).personal_details(), self.salary, self.id
+        return super().personal_details(), self.salary, self.id
 
 
 class Student(Person):
 
     def __init__(self, name, address, age, id):
-        super(Student, self).__init__(name, address, age)
+        super().__init__(name, address, age)
         self.id = id
 
     def personal_details(self):
-        return super(Student, self).personal_details(), self.id
+        return super().personal_details(), self.id
 
 
 class Name:
 
     def __init__(self, first_name, surname, title, other_names=None):
         if other_names is None:
-            other_names = []
+             other_names = []
         self.first_name = first_name.title()
         self.surname = surname.title()
         self.title = title.title()
@@ -63,18 +63,18 @@ class Name:
 class DistanceStudent(Student):
 
     def __init__(self, name, address, age, id, current_module):
-        super(DistanceStudent, self).__init__(name, address, age, id)
+        super().__init__(name, address, age, id)
         self.current_module = current_module
 
     def personal_details(self):
-        return super(DistanceStudent, self).personal_details(), self.current_module
+        return super().personal_details(), self.current_module
 
     def print_current_module_details(self):
         return f"{self.name.formal_name()} is currently studying the {self.current_module} module."
 
 
 # Test Data
-aidan_name = Name("aidan", "curley", "mr.", ["paul", "joseph"])
+aidan_name = Name("aidan", "curley", "mr.", ["Paul", "Joseph"])
 aidan = DistanceStudent(aidan_name, "123 Hope St.", 46, "ST112", "Advanced Programming")
 print(aidan.print_current_module_details())
 

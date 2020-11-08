@@ -5,10 +5,10 @@ from measurement_converter.Conversions import to_feet, to_meters, to_kilos, to_p
 
 
 menu_options = {1: "Length", 2: "Mass", 3: "Temperature", 4: "Time", 0: "Quit"}
-length_options = {1: "To feet and inches", 2: "To meters from feet", 0: "Quit"}
-mass_options = {1: "To kgs from lbs", 2: "To lbs from kgs", 0: "Quit"}
-temp_options = {1: "To C from K", 2: "To K from C", 0: "Quit"}
-time_options = {1: "To secs from Mins", 2: "To Hours,Mins from secs", 0: "Quit"}
+measurement_options = {"Length": {1: "To feet and inches", 2: "To meters from feet", 0: "Quit"},
+                       "Mass": {1: "To kgs from lbs", 2: "To lbs from kgs", 0: "Quit"},
+                       "Temperature": {1: "To C from K", 2: "To K from C", 0: "Quit"},
+                       "Time": {1: "To secs from Mins", 2: "To Hours,Mins from secs", 0: "Quit"}}
 
 
 def main():
@@ -18,13 +18,13 @@ def main():
     while conversion_type == -1:
         conversion_type = capture_menu_choice(menu_options)
     if conversion_type == "Length":
-        sub_menu = length_options
-    if conversion_type == "Mass":
-        sub_menu = mass_options
-    if conversion_type == "Temperature":
-        sub_menu = temp_options
-    if conversion_type == "Time":
-        sub_menu = time_options
+        sub_menu = measurement_options["Length"]
+    elif conversion_type == "Mass":
+        sub_menu = measurement_options["Mass"]
+    elif conversion_type == "Temperature":
+        sub_menu = measurement_options["Temperature"]
+    elif conversion_type == "Time":
+        sub_menu = measurement_options["Time"]
 
     # display specific sub-menu and capture user choice
     display_menu(sub_menu)
@@ -42,6 +42,7 @@ def main():
                         "To Hours,Mins from secs": to_hrsmins(float(value))}
 
     print(function_library[function_type])
+
 
 if __name__ == "__main__":
     main()
