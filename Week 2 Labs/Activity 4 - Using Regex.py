@@ -19,7 +19,7 @@ for line in file:
 print("\nResults")
 print(f"Looking for shrieked. Found: {re.search('s[a-z]{6}d', the_raven).group(0)}")
 print(f"Is 'bleak' in The Raven? Answer: {'bleak' in the_raven}")
-print(f"All words containing 'pp': {re.findall('[a-zA-Z]*pp[a-z]*', the_raven)}")
+print(f"Number of words containing 'pp': {len(re.findall('[a-zA-Z]*pp[a-z]*', the_raven))}")
 print("All words that start with t and do not end in e: ", end="")
 print(re.findall("\\b[T|t][\w]*(?<!e)\\b", the_raven))
 
