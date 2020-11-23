@@ -65,8 +65,6 @@ def add_frame_with_radio_buttons(window, options):
 def add_frame_with_checkboxes(window, options):
     frame2 = tk.Frame(window, bg="light gray", relief='sunken')
     frame2.grid(row=5, column=6, rowspan=3, columnspan=3, padx=(10, 10), sticky="nwe")
-    status = tk.StringVar()
-    status.set(options[0])  # initialize
     r = 0
     for option in options:
         b = tk.Checkbutton(frame2, text=option, bg="light gray")
