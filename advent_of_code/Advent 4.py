@@ -30,13 +30,13 @@ class Passport:
     def is_valid_eyr(self, low, high):
         return self.eyr is not None and low <= int(self.eyr) <= high
 
-    def is_valid_hgt(self):
+    def is_valid_hgt(self, low_cm, high_cm, low_in, high_in):
         if self.hgt is None:
             return False
         if 'cm' in self.hgt:
-            return 150 <= int(self.hgt.strip('cm')) <= 193
+            return low_cm <= int(self.hgt.strip('cm')) <= high_cm
         elif 'in' in self.hgt:
-            return 59 <= int(self.hgt.strip('in')) <= 76
+            return low_in <= int(self.hgt.strip('in')) <= high_in
 
     def is_valid_hcl(self):
         return self.hcl is not None
@@ -48,7 +48,6 @@ class Passport:
         return self.ecl is not None
 
 
-pps = []
 count = 0
 for passport in passports:
     pp = Passport()
@@ -61,7 +60,7 @@ for passport in passports:
         if re.search(r"(?<=ecl:)amb|blu|brn|gry|grn|hzl|oth", passport) else None
     pp.pid = re.search(r"(?<!\d)\d{9}(?!\d)", passport).group(0) if re.search(r"(?<!\d)\d{9}(?!\d)", passport) else None
     if pp.is_valid_byr(1920, 2002) and pp.is_valid_iyr(2010, 2020) and pp.is_valid_eyr(2020, 2030) and pp.is_valid_ecl() \
-            and pp.is_valid_hcl() and pp.is_valid_hgt() and pp.is_valid_pid():
+            and pp.is_valid_hcl() and pp.is_valid_hgt(150, 193, 54, 76) and pp.is_valid_pid():
         count += 1
 
 print(f'Task2: {count}')
