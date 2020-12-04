@@ -1,20 +1,16 @@
 from functools import reduce
 
-# read in file, cut new line and extend file 100 times to the right
+# read in file, cut new line
 f = open("input3.txt", "r")
-lines = f.readlines()
-full_map = [line.replace('\n', '')*100 for line in lines]
+full_map = [line.replace('\n', '') for line in f.readlines()]
 
 
 def count_trees(this_map, inc_x, inc_y):
     x, trees = 0, 0
-    try:
-        for row in range(0, len(this_map), inc_y):
-            if this_map[row][x] == '#':
-                trees += 1
-            x = x + inc_x
-    except IndexError:
-        return trees
+    for row in range(0, len(this_map), inc_y):
+        if this_map[row][x % len(this_map[row])] == '#':
+            trees += 1
+        x = x + inc_x
     return trees
 
 
