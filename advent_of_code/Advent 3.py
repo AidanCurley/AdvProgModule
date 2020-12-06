@@ -17,3 +17,4 @@ def count_trees(this_map, inc_x, inc_y):
 print(f'Task1: {count_trees(full_map, 3, 1)}')
 num_trees = [count_trees(full_map, x, y) for (x, y) in [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)]]
 print(f'Task2: {reduce(lambda x, y: x * y, num_trees)}')
+
