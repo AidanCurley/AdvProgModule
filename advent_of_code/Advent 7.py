@@ -9,9 +9,9 @@ lines = [line.split('contain') for line in file]
 # add nodes
 g = DiGraph()
 g.add_node(line[0].strip(" bags") for line in lines)
-lines = lines[:-1] # get rid of last blank line
+lines = lines[:-1]  # get rid of last blank line
 
-#add weighted eddges
+# add weighted edges
 for line in lines:
     for entry in line[1].split(','):
         if "no other bags" not in entry:
