@@ -5,25 +5,22 @@ import re
 f = open("input7.txt", "r")
 file = f.read().split("\n")
 lines = [line.split('contain') for line in file]
-
-# add nodes
-g = DiGraph()
-g.add_node(line[0].strip(" bags") for line in lines)
 lines = lines[:-1]  # get rid of last blank line
+
+g = DiGraph()
 
 # add weighted edges
 for line in lines:
     for entry in line[1].split(','):
         if "no other bags" not in entry:
             source_node = re.search(r'\w*\s\w*', line[0]).group(0)
-            node = re.search(r'(?<=\d\s)\w*\s\w*', entry).group(0)
+            dest_node = re.search(r'(?<=\d\s)\w*\s\w*', entry).group(0)
             weight = re.search(r'(?<=\s)\d*', entry).group(0)
-            g.add_edge(source_node, node, weight=weight)
+            g.add_edge(source_node, dest_node, weight=weight)
 
-# get all paths to shiny gold
 sources = []
-source_nodes = [node for node in g.nodes]
-for source in source_nodes:
+# get all paths to shiny gold
+for source in list(g.nodes):
     for path in all_simple_paths(g, source=source, target='shiny gold'):
         sources.append(path[0])
 
@@ -32,8 +29,7 @@ print(f'Task1: {len(set(sources))}')
 
 # get all paths from shiny gold
 res = []
-dest_nodes = [node for node in g.nodes]
-for dest in dest_nodes:
+for dest in list(g.nodes):
     for path in all_simple_paths(g, source='shiny gold', target=dest):
         res.append(path)
 
