@@ -1,6 +1,6 @@
 f = open("input8.txt", "r")
 file = f.read().split("\n")
-file = file[:-1] # get rid of annoying last line
+file = file[:-1]  # get rid of annoying last line
 
 
 # run file and return accumulator and boolean end_of_file_reached
@@ -22,7 +22,6 @@ def run_file(f):
             i += 1
     return accumulator, end_of_file_reached
 
-
 print(f'Task1: {run_file(file)}')
 
 # loop through instructions - substitute 'nop' for 'jmp'
@@ -34,6 +33,7 @@ for instruction in range(len(file)):
     elif 'nop' in temp_file[instruction]:
         temp_file[instruction] = temp_file[instruction].replace('nop', 'jmp')
     if True in run_file(temp_file):
-        print(f'Task2: {run_file(temp_file)}')
+        print(f'Task2: {run_file(temp_file)} ---- instruction changed: {file[instruction]}')
+
         break
 

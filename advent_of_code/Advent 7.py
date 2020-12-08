@@ -24,7 +24,7 @@ for source in list(g.nodes):
     for path in all_simple_paths(g, source=source, target='shiny gold'):
         sources.append(path[0])
 
-# reduce paths to only one per source
+# remove duplicate sources and count
 print(f'Task1: {len(set(sources))}')
 
 # get all paths from shiny gold
