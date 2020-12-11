@@ -3,7 +3,7 @@ def is_seat_occupied(floorplan,row,seat):
     return floorplan[row][seat] == '#'
 
 
-def count_occupied_surrounding_seats(floorplan, row, seat):
+def count_occupied_adjacent_seats(floorplan, row, seat):
     num_occupied = 0
     for i in range(row-1, row+2):
         for j in range(seat-1, seat+2):
@@ -24,7 +24,7 @@ def make_new_floorplan(floorplan):
         for seat in range(len(floorplan[row])):     # counter for seat in row
             if floorplan[row][seat] != '.':
                 occupied = is_seat_occupied(floorplan, row, seat)
-                neighbours_occupied = count_occupied_surrounding_seats(floorplan, row, seat)
+                neighbours_occupied = count_occupied_adjacent_seats(floorplan, row, seat)
                 if not occupied and neighbours_occupied == 0:
                     new_floorplan[row] = new_floorplan[row][:seat] + '#' + new_floorplan[row][seat + 1:]
                 if occupied is True and neighbours_occupied >= 4:

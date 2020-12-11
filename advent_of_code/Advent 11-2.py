@@ -10,7 +10,7 @@ def is_seat_occupied(floorplan,row,seat):
     return False
 
 
-def is_occupied_in_line(floorplan, row, seat, direction):
+def is_occupied_visible(floorplan, row, seat, direction):
     while len(floorplan)-1 >= row >= 0 and 0 <= seat <= len(floorplan[row])-1:
         row += direction[0]
         seat += direction[1]
@@ -19,10 +19,10 @@ def is_occupied_in_line(floorplan, row, seat, direction):
     return False
 
 
-def count_occupied_seats_in_all_directions(floorplan, row, seat, dirs):
+def count_visible_occupied_seats_all_directions(floorplan, row, seat, dirs):
     num_occupied = 0
     for direction in dirs:
-        num_occupied += is_occupied_in_line(floorplan, row, seat, direction)  # check for each direction
+        num_occupied += is_occupied_visible(floorplan, row, seat, direction)  # check for each direction
     return num_occupied
 
 
@@ -33,7 +33,7 @@ def task2(floorplan):
         for seat in range(len(floorplan[row])):
             if floorplan[row][seat] != '.':
                 occupied = is_seat_occupied(floorplan, row, seat)
-                neighbours_occupied = count_occupied_seats_in_all_directions(floorplan, row, seat, dirs)
+                neighbours_occupied = count_visible_occupied_seats_all_directions(floorplan, row, seat, dirs)
                 if not occupied and neighbours_occupied == 0:
                     new_floorplan[row] = new_floorplan[row][:seat] + '#' + new_floorplan[row][seat + 1:]
                 if occupied and neighbours_occupied >= 5:
