@@ -24,7 +24,7 @@ paths[0] = 1
 for i in range(1, len(joltages)):
     paths[joltages[i]] = paths[joltages[i] - 1] + paths[joltages[i] - 2] + paths[joltages[i] - 3]
 
-print(f'Task1: {paths[joltages[-1]]}')
+print(f'Task2: {paths[joltages[-1]]}')
 
 
 ## This solution works for all test data but takes too long to complete using the full input file
