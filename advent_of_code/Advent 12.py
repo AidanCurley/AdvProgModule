@@ -18,12 +18,6 @@ def move(pos, direction, distance):
     return pos
 
 
-def move_towards_waypoint(pos, distance, waypoint):
-    for i in range(len(pos)):
-        pos[i] += distance * waypoint[i]
-    return pos
-
-
 def move_waypoint(waypoint, direction, distance):
     for i in range(len(waypoint)):
         waypoint[i] += distance * direction[i]
@@ -67,11 +61,11 @@ def task2():
     current_position = [0, 0]
     for entry in journey:
         if 'F' in entry:
-            current_position = move_towards_waypoint(current_position, int(entry.lstrip('F')), current_waypoint)
+            current_position = move(current_position, current_waypoint, int(entry.lstrip('F')))
         elif 'R' in entry:
-            current_waypoint = rotate_waypoint(current_waypoint, int(entry.lstrip('R'))%360)
+            current_waypoint = rotate_waypoint(current_waypoint, int(entry.lstrip('R')) % 360)
         elif 'L' in entry:
-            current_waypoint = rotate_waypoint(current_waypoint, -int(entry.lstrip('L'))%360)
+            current_waypoint = rotate_waypoint(current_waypoint, -int(entry.lstrip('L')) % 360)
         else:
             distance = int(re.search(r"\d+", entry).group(0))
             direction = re.search(r"\D+", entry).group(0)
