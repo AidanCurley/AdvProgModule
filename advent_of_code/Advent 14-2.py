@@ -3,7 +3,7 @@ import time
 begin = time.time()
 
 
-def mask_address(mask, address):
+def apply_mask(mask, address):
     masked = []
     for ch in range(len(mask)):
         # if mask is 0 leave address character unchanged, otherwise add mask character
@@ -38,7 +38,7 @@ for line in f.readlines():
     else:
         address = bin(int(re.search(r"(?<=mem\[)\d+", line).group(0))).lstrip('0b)').zfill(36)
         val_to_memorise = int(re.search(r"(?<==\s)\d*", line).group(0))
-        masked_address = mask_address(mask, address)
+        masked_address = apply_mask(mask, address)
         for address in list_possible_addresses(masked_address):
             memory[address] = val_to_memorise
 
