@@ -3,18 +3,14 @@ import re
 
 def make_36_chars_long(string):
     zeros_to_add = 36 - len(string)
-    string_out = '0' * zeros_to_add + string
-    return string_out
+    return '0' * zeros_to_add + string
 
 
 def mask_address(mask, address):
     masked = []
     for ch in range(len(mask)):
         # if mask is 0 leave address character unchanged, otherwise add mask character
-        if mask[ch] == '0':
-            masked.append(address[ch])
-        else:
-            masked.append(mask[ch])
+        masked.append(address[ch] if mask[ch] == '0' else mask[ch])
     return masked
 
 
@@ -28,7 +24,7 @@ def list_possible_addresses(base_address):
 
     for ch in range(1, len(base_address) + 1):
         if base_address[-ch] == 'X':
-            x = len(address_book)
+            x = len(address_book) # store to variable of the length just grows as values are appended
             # add value of new bit to each address in address_book and append to address_book
             for i in range(x):
                 address_book.append(address_book[i] + (2 ** (ch - 1)))
