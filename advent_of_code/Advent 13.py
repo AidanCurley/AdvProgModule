@@ -1,3 +1,4 @@
+
 f = open('input13.txt', "r")
 time = f.readline()
 buses = f.readline().split(",")

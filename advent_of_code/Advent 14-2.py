@@ -1,9 +1,6 @@
 import re
-
-
-def make_36_chars_long(string):
-    zeros_to_add = 36 - len(string)
-    return '0' * zeros_to_add + string
+import time
+begin = time.time()
 
 
 def mask_address(mask, address):
@@ -19,7 +16,7 @@ def list_possible_addresses(base_address):
     new_address = base_address.copy()
     # get base case if all Xs are zeroes
     new_address[:] = [ch if ch != 'X' else '0' for ch in base_address]
-    decimal_address = int(''.join(new_address),2)
+    decimal_address = int(''.join(new_address), 2)
     address_book.append(decimal_address)
 
     for ch in range(1, len(base_address) + 1):
@@ -39,10 +36,11 @@ for line in f.readlines():
     if 'mask' in line.strip():
         mask = line.lstrip('mask = ').strip()
     else:
-        address = make_36_chars_long(bin(int(re.search(r"(?<=mem\[)\d+", line).group(0))).lstrip('0b)'))
+        address = bin(int(re.search(r"(?<=mem\[)\d+", line).group(0))).lstrip('0b)').zfill(36)
         val_to_memorise = int(re.search(r"(?<==\s)\d*", line).group(0))
         masked_address = mask_address(mask, address)
         for address in list_possible_addresses(masked_address):
             memory[address] = val_to_memorise
 
 print(f'Task2: {sum(memory.values())}')
+print(f"Runtime: {time.time()-begin} seconds.")
