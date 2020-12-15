@@ -41,6 +41,7 @@ for line in f.readlines():
         masked_address = apply_mask(mask, address)
         for address in list_possible_addresses(masked_address):
             memory[address] = val_to_memorise
-
+        print('Entry done')
+        print(f"Runtime: {time.time() - begin} seconds.")
 print(f'Task2: {sum(memory.values())}')
 print(f"Runtime: {time.time()-begin} seconds.")
